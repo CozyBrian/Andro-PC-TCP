@@ -1,0 +1,28 @@
+do
+            {
+                try
+                {
+                    const int bytesize = 256;
+                    byte[] buffer = new byte[bytesize];
+                    string x = client.GetStream().Read(buffer, 0, bytesize).ToString();
+                    var data = ASCIIEncoding.ASCII.GetString(buffer);
+
+                    System.IO.File.AppendAllText(@"C:\Users\drago\source\repos\ChatSolution\Server\bin\Debug\netcoreapp3.1\New folder\test.txt", data + Environment.NewLine);
+                    
+                    
+                    if (data.ToUpper().Contains("                                         "))
+                    {
+                        Console.WriteLine("Pc is going to Sleep Mode!" + " \n");
+                        client.Dispose();
+                        client.Close();
+                    }
+                   
+               
+                }
+                catch (Exception e)
+                {
+                    client.Dispose();
+                    client.Close();
+                }
+
+            } while (client.Connected);
